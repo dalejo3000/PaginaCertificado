@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-03-2021 a las 13:01:23
+-- Tiempo de generación: 27-03-2021 a las 00:36:45
 -- Versión del servidor: 10.1.33-MariaDB
 -- Versión de PHP: 7.4.8
 
@@ -32,17 +32,20 @@ CREATE TABLE `clientes` (
   `nombre` varchar(300) NOT NULL,
   `cedula` char(10) NOT NULL,
   `imagen` varchar(200) NOT NULL,
-  `id_categoria` int(11) NOT NULL
+  `id_categoria` int(11) NOT NULL,
+  `registro` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id`, `nombre`, `cedula`, `imagen`, `id_categoria`) VALUES
-(1, 'Alejandro Romero', '1234567890', '1616139888.jpg', 1),
-(2, 'Alejandro Romero', '1234567890', '1616139888.jpg', 2),
-(3, 'Alejandro Romero', '1234567890', '1616139888.jpg', 3);
+INSERT INTO `clientes` (`id`, `nombre`, `cedula`, `imagen`, `id_categoria`, `registro`) VALUES
+(1, 'Alejandro Romero', '1234567890', '1616139888.jpg', 1, ''),
+(2, 'Alejandro Romero', '1234567890', '1616139888.jpg', 2, ''),
+(3, 'Alejandro Romero', '1234567890', '1616139888.jpg', 3, ''),
+(7, 'David', '2233445566', '', 0, ''),
+(11, 'Ricardo Palacios', '1722637475', '', 2, '');
 
 -- --------------------------------------------------------
 
@@ -56,17 +59,19 @@ CREATE TABLE `cursos` (
   `descripcion` varchar(400) NOT NULL,
   `duracion` int(11) NOT NULL,
   `fecha_inicio` date NOT NULL,
-  `imagen` varchar(400) NOT NULL
+  `imagen` varchar(400) NOT NULL,
+  `fecha_creacion` date NOT NULL,
+  `usuario_creacion` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cursos`
 --
 
-INSERT INTO `cursos` (`id`, `nombre`, `descripcion`, `duracion`, `fecha_inicio`, `imagen`) VALUES
-(1, 'Matemáticas', 'Materia de Matemáticas', 30, '2021-03-09', ''),
-(2, 'Lenguaje', 'Materia de Lenguaje', 40, '2021-03-25', ''),
-(3, 'Sociales', 'Materia de Sociales', 60, '2021-03-17', '');
+INSERT INTO `cursos` (`id`, `nombre`, `descripcion`, `duracion`, `fecha_inicio`, `imagen`, `fecha_creacion`, `usuario_creacion`) VALUES
+(1, 'MatemÃ¡ticas', 'Curso de MatemÃ¡ticas', 10, '2021-03-10', '', '2021-03-26', ''),
+(2, 'Lenguaje', 'Curso de Lenguaje', 12, '2021-03-11', '', '2021-03-26', ''),
+(3, 'Sociales', 'Curso de Sociales', 10, '2020-10-30', '', '2021-03-26', '');
 
 -- --------------------------------------------------------
 
@@ -139,6 +144,12 @@ ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `cursos`
+--
+ALTER TABLE `cursos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `registro_certificado`
 --
 ALTER TABLE `registro_certificado`
@@ -158,7 +169,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `cursos`
+--
+ALTER TABLE `cursos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `registro_certificado`
@@ -170,7 +187,7 @@ ALTER TABLE `registro_certificado`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
