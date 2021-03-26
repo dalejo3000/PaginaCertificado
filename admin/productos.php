@@ -20,7 +20,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Incripción Cursos</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -55,7 +55,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Clientes</h1>
+            <h1 class="m-0 text-dark">Incripción cursos</h1>
           </div><!-- /.col -->
           <div class="col-sm-6 text-right">
              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -109,6 +109,7 @@
                       <td><?php echo $f['cedula'];?></td>
                       <td><?php echo $f['catego'];?></td>
                       <td>
+                        <!--
                         <button class="btn btn-primary btn-small btnEditar"
                           data-id="<?php echo $f['id']; ?>"
                           data-nombre="<?php echo $f['nombre']; ?>"
@@ -117,6 +118,7 @@
                           data-toggle="modal" data-target="#modalEditar">
                           <i class="fa fa-edit"></i>
                         </button>
+                        -->
                         <button class="btn btn-danger btn-small btnEliminar"
                           data-id="<?php echo $f['id']; ?>"
                           data-toggle="modal" data-target="#modalEliminar">
@@ -139,16 +141,22 @@
       <div class="modal-content">
         <form action="../php/insertarproducto.php" method="POST" enctype="multipart/form-data">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Insertar Cliente</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Inscripción Curso</h5>
+
+
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+
+
           <div class="modal-body">
               <div class="form-group">
                   <label for="nombre">Nombre</label>
                   <input type="text" name="nombre" placeholder="Nombre del cliente" id="nombre" class="form-control" required>
               </div>
+
+
               <div class="form-group">
                   <label for="cedula">Cédula</label>
                   <input type="text" name="cedula" placeholder="CI" id="cedula" class="form-control" required>
@@ -198,12 +206,19 @@
       </div>
     </div>
    <!-- Modal Editar -->
+
    <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="modalEditar" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <form action="../php/editarproducto.php" method="POST" enctype="multipart/form-data">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalEditar">Editar Producto</h5>
+            <h5 class="modal-title" id="modalEditar">Editar Incripción Curso</h5>
+            <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
+              <form action="./buscar.php" class="site-block-top-search" method="GET">
+                <span class="icon icon-search2"></span>
+                <input type="text" class="form-control border-0" placeholder="CI Cliente" name="texto">
+              </form>
+            </div>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -213,8 +228,9 @@
 
               <div class="form-group">
                   <label for="nombre">Nombre</label>
-                  <input type="nombreEdit" name="nombre" placeholder="Nombre del cliente" id="nombreEdit" class="form-control" required>
+                  <input type="text" name="nombre" placeholder="Nombre del cliente" id="nombreEdit" class="form-control" required>
               </div>
+
               <div class="form-group">
                   <label for="cedulaEdit">Cédula</label>
                   <input type="text" name="cedula" placeholder="CI" id="cedulaEdit" class="form-control" required>
@@ -239,8 +255,9 @@
       </div>
     </div>
   </div>
-  <?php include "./layouts/footer.php";?>
+  </*?php include "./layouts/footer.php";?*/>
 </div>
+
 <!-- ./wrapper -->
 
 <!-- jQuery -->

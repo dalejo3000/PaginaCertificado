@@ -200,21 +200,27 @@
                 </div>
 
                 <div class="form-group row">
-                <div class="col-md-6">
-                  <label for="c_curso" class="text-black">Curso<span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="c_curso" name="c_curso">
-                </div>
+                  <div class="col-md-6">
+                    <label for="c_curso" class="text-black">Curso<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="c_curso" name="c_curso">
+                  </div>
 
-                <div class="col-md-6">
-                  <label for="c_account_password" class="text-black">Password</label>
-                  <input type="password" class="form-control" id="c_account_password" name="c_account_password" placeholder="">
-                </div>
-
+                  <div class="col-md-6">
+                    <label for="c_account_password" class="text-black">Password</label>
+                    <input type="password" class="form-control" id="c_account_password" name="c_account_password" placeholder="">
+                  </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="c_nivel">Nivel</label>
-                    <input type="text" class="form-control" id="c_nivel" name="c_nivel" value="admin">
+                    <label for="nivel">Nivel</label>
+                    <select name="nivel" id="nivel" class="form-control" required>
+                     <?php
+                      $res= $conexion->query("select distinct nivel from usuario");
+                      while($f=mysqli_fetch_array($res)){
+                        echo '<option value="'.$f['id'].'" >'.$f['nivel'].'</option>';
+                      }
+                     ?>
+                    </select>
                 </div>
 
                 <div class="form-group">

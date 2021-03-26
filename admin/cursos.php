@@ -9,10 +9,10 @@
     header("Location: ../index.php");
   }
   $resultado = $conexion ->query("
-    select * from cursos")or die($conexion->error);
+    select * from cursos
+    order by id ASC")or die($conexion->error);
 
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +57,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6 text-right">
              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              <i class="fa fa-plus"></i> Insertar Curso
+              <i class="fa fa-plus"></i> Insertar Registro
             </button>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -104,10 +104,7 @@
                   ?>
                    <tr>
                       <td><?php echo $f['id'];?></td>
-                      <td>
-                        <img src="../images/curso/<?php echo $f['imgane'];?>" width="40px" height="40px" alt="">
-                        <?php echo $f['nombre'];?>
-                      </td>
+                      <td><?php echo $f['nombre'];?></td>
                       <td><?php echo $f['descripcion'];?></td>
                       <td><?php echo $f['duracion'];?></td>
                       <td><?php echo $f['fecha_inicio'];?></td>
@@ -117,7 +114,7 @@
                           data-nombre="<?php echo $f['nombre']; ?>"
                           data-descripcion="<?php echo $f['descripcion']; ?>"
                           data-duracion="<?php echo $f['duracion']; ?>"
-                          data-fecha="<?php echo $f['fecha_inicio']; ?>"
+                          data-fecha_inicio="<?php echo $f['fecha_inicio']; ?>"
                           data-toggle="modal" data-target="#modalEditar">
                           <i class="fa fa-edit"></i>
                         </button>
@@ -141,47 +138,38 @@
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <?php /* include("./layouts/header.php"); */?>
-          <form action="../thankyou.php" method="POST" enctype="multipart/form-data">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Insertar Usuario</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-
+        <form action="../php/insertarcurso.php" method="POST" enctype="multipart/form-data">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Insertar Cliente</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
           <div class="modal-body">
-            <div class="col-md-20 mb-5 mb-md-0">
-              <div class="p-3 p-lg-5 border">
-                  <h2 class="h3 mb-3 text-black">Crear Curso</h2>
-                <div class="form-group row">
-                  <div class="col-md-6">
-                    <label for="c_fname" class="text-black">Nombre del curso<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="c_fname" name="c_fname">
-                  </div>
-                  <div class="col-md-6">
-                    <label for="c_fname" class="text-black">Descripción<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="c_fname" name="c_fname">
-                  </div>
-                  <div class="col-md-6">
-                    <label for="c_fname" class="text-black">Duración<span class="text-danger">*</span></label>
-                    <input type="number" class="form-control" id="c_fname" name="c_fname">
-                  </div>
-                  <div class="col-md-6">
-                    <label for="c_fname" class="text-black">Fecha de Inicio del Curso<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="c_fname" name="c_fname">
-                  </div>
-                  <div class="form-group">
-                      <label for="imagen">Imagen</label>
-                      <input type="file" name="img_perfil"  id="imagen" class="form-control">
-                  </div>
-                </div>
+              <div class="form-group">
+                  <label for="nombre">Nombre</label>
+                  <input type="text" name="nombre" placeholder="Nombre del curso" id="nombre" class="form-control" required>
+              </div>
+              <div class="form-group">
+                  <label for="descripcion">Descripción</label>
+                  <input type="text" name="descripcion" placeholder="Descripción del curso" id="descripcion" class="form-control" required>
+              </div>
 
+              <div class="form-group">
+                  <label for="duracion">Duración (días)</label>
+                  <input type="number" min="0" name="duracion" placeholder="15" id="duracion" class="form-control" required>
+              </div>
 
+              <div class="form-group">
+                  <label for="fecha_inicio">Fecha de inicio</label>
+                  <input type="date" min="0" name="fecha_inicio" placeholder="15" id="fecha_inicio" class="form-control" required>
               </div>
 
           </div>
-
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
         </form>
       </div>
     </div>
@@ -208,12 +196,11 @@
         </div>
       </div>
     </div>
-  </div>
    <!-- Modal Editar -->
    <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="modalEditar" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <form action="../php/editarproducto.php" method="POST" enctype="multipart/form-data">
+        <form action="../php/editarcurso.php" method="POST" enctype="multipart/form-data">
           <div class="modal-header">
             <h5 class="modal-title" id="modalEditar">Editar Producto</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -225,54 +212,19 @@
 
               <div class="form-group">
                   <label for="nombre">Nombre</label>
-                  <input type="nombreEdit" name="nombre" placeholder="Nombres y Apellidos" id="nombreEdit" class="form-control" required>
+                  <input type="nombreEdit" name="nombre" placeholder="Nombre del cliente" id="nombreEdit" class="form-control" required>
               </div>
               <div class="form-group">
-                  <label for="cedula">Cedula</label>
-                  <input type="cedulaEdit" name="cedula" placeholder="CI" id="cedulaEdit" class="form-control" required>
+                  <label for="descripcionEdit">Descripción</label>
+                  <input type="text" name="cedula" placeholder="CI" id="descripcionEdit" class="form-control" required>
               </div>
-
               <div class="form-group">
-                  <label for="fecha">Fecha</label>
-                  <input type="dateEdit" name="fecha"  id="fechaEdit" class="form-control" required>
+                  <label for="duracionEdit">Duración (días)</label>
+                  <input type="text" name="cedula" placeholder="CI" id="duracionEdit" class="form-control" required>
               </div>
-
               <div class="form-group">
-                  <label for="cedula">Curso</label>
-                  <input type="cursoEdit" name="curso" placeholder="Curso" id="cursoEdit" class="form-control" required>
-              </div>
-
-              <div class="form-group">
-                  <label for="telefono">Telefono</label>
-                  <input type="text" name="telefonoEdit" placeholder="telefono" id="telefonoEdit" class="form-control" required>
-              </div>
-
-              <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="emailEdit" name="email" placeholder="Email" id="emailEdit" class="form-control" required>
-              </div>
-
-              <div class="form-group">
-                  <label for="img_perfil">Imagen</label>
-                  <input type="file" name="img_perfil"  id="img_perfil" class="form-control">
-              </div>
-
-              <div class="form-group">
-                  <label for="passwordEdit">password</label>
-                  <input type="password" name="password" placeholder="precio" id="passwordEdit" class="form-control" required>
-              </div>
-
-
-              <div class="form-group">
-                  <label for="nivelEdit">Nivel</label>
-                  <select name="nivel" id="nivel" class="form-control" required>
-                   <?php
-                    $res= $conexion->query("select distinct nivel from usuario");
-                    while($f=mysqli_fetch_array($res)){
-                      echo '<option value="'.$f['id'].'" >'.$f['nivel'].'</option>';
-                    }
-                   ?>
-                  </select>
+                  <label for="fechaEdit">Fecha de inicio</label>
+                  <input type="text" name="fechaEdit" placeholder="" id="fechaEdit" class="form-control" required>
               </div>
 
           </div>
@@ -289,39 +241,39 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="../admin/dashboard/plugins/jquery/jquery.min.js"></script>
+<script src="./dashboard/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="../admin/dashboard/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="./dashboard/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="../admin/dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="./dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
-<script src="../admin/dashboard/plugins/chart.js/Chart.min.js"></script>
+<script src="./dashboard/plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
-<script src="../admin/dashboard/plugins/sparklines/sparkline.js"></script>
+<script src="./dashboard/plugins/sparklines/sparkline.js"></script>
 <!-- JQVMap -->
-<script src="../admin/dashboard/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="../admin/dashboard/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<script src="./dashboard/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="./dashboard/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
 <!-- jQuery Knob Chart -->
-<script src="../admin/dashboard/plugins/jquery-knob/jquery.knob.min.js"></script>
+<script src="./dashboard/plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
-<script src="../admin/dashboard/plugins/moment/moment.min.js"></script>
-<script src="../admin/dashboard/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="./dashboard/plugins/moment/moment.min.js"></script>
+<script src="./dashboard/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="../admin/dashboard/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="./dashboard/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
-<script src="../admin/dashboard/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="./dashboard/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
-<script src="../admin/dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="./dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../admin/dashboard/dist/js/adminlte.js"></script>
+<script src="./dashboard/dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../admin/dashboard/dist/js/pages/dashboard.js"></script>
+<script src="./dashboard/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../admin/dashboard/dist/js/demo.js"></script>
+<script src="./dashboard/dist/js/demo.js"></script>
 
 <script>
   $(document).ready(function(){
@@ -334,7 +286,7 @@
     });
     $(".eliminar").click(function(){
       $.ajax({
-        url: './php/eliminarusuario.php',
+        url: '../php/eliminarcurso.php',
         method:'POST',
         data:{
           id:idEliminar
@@ -348,23 +300,13 @@
     $(".btnEditar").click(function(){
       idEditar=$(this).data('id');
       var nombre=$(this).data('nombre');
-      var cedula=$(this).data('cedula');
-      var fecha=$(this).data('fecha');
-      var curso=$(this).data('curso');
-      var telefono=$(this).data('telefono');
-      var email=$(this).data('email');
-      var password=$(this).data('password');
-      var nivel=$(this).data('nivel');
-
+      var descripcion=$(this).data('descripcion');
+      var duracion=$(this).data('duracion');
+      var fecha_inicio=$(this).data('fecha_inicio');
       $("#nombreEdit").val(nombre);
-      $("#cedulaEdit").val(cedula);
-      $("#fechaEdit").val(fecha);
-      $("#cursoEdit").val(curso);
-      $("#telefonoEdit").val(telefono);
-      $("#emailEdit").val(email);
-      $("#passwordEdit").val(password);
-
-      $("#idEdit").val(idEditar);
+      $("#descripcionEdit").val(descripcion);
+      $("#duracionEdit").val(duracion);
+      $("#fechaEdit").val(fecha_inicio);
     });
   });
 

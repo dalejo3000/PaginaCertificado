@@ -13,6 +13,7 @@ if(isset($_POST['c_account_password'])){
         $password = $_POST['c_account_password'];
     }
 }
+
 $conexion->query("insert into usuario (nombre,telefono,email,password,img_perfil,nivel,cedula,fecha,curso)
   values(
     '".$_POST['c_fname']." ".$_POST['c_lname']."',
@@ -23,9 +24,10 @@ $conexion->query("insert into usuario (nombre,telefono,email,password,img_perfil
     '".$_POST['c_nivel']."',
     '".$_POST['c_cedula']."',
     '".$_POST['c_fecha']."',
-    '".$_POST['c_curso']."'
+    '".$_POST['c_curso']."',
         )
 ")or die($conexion->error);
+
 header("Location: ./admin/usuarios.php?success");
 $id_usuario = $conexion->insert_id;
 

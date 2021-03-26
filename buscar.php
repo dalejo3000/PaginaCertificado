@@ -15,8 +15,6 @@
   $resultado = $conexion ->query("
     select * from usuario
     order by nivel ASC")or die($conexion->error);
-
-
 /*include ("conexion.php");
 $cedula = $_POST['cedula'];
 mysql_select_db($carrito,$conexion) or die ("Error al conectar base de datos");

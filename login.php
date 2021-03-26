@@ -21,7 +21,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="./index.php"><b>Tienda</b></a>
+    <a href="./index.php"><b>Acceso</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -46,12 +46,13 @@
           </div>
         </div>
         <div class="row">
+
           <div class="col-8">
             <div class="icheck-primary">
               <input type="checkbox" id="remember">
-              <label for="remember">
+              <!--<label for="remember">
                 Remember Me
-              </label>
+              </label>-->
             </div>
           </div>
           <!-- /.col -->
@@ -61,7 +62,7 @@
           <!-- /.col -->
         <br>
         <br>
-          <?php 
+          <?php
             if(isset($_GET['error'])){
               echo '<div class="col-12 alert alert-danger">'.$_GET['error'].'</div>';
             }
@@ -69,14 +70,14 @@
         </div>
       </form>
 
-     
 
-      <p class="mb-1">
+
+      <!--<p class="mb-1">
         <a href="forgot-password.html">I forgot my password</a>
       </p>
       <p class="mb-0">
         <a href="register.html" class="text-center">Register a new membership</a>
-      </p>
+      </p>-->
     </div>
     <!-- /.login-card-body -->
   </div>

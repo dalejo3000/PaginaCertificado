@@ -91,6 +91,14 @@
             if($arregloUsuario['nivel']== 'admin'){
           ?>
               <li class="nav-item">
+                <a href="./clientes.php" class="nav-link">
+                  <i class="nav-icon fa fa-users"></i>
+                  <p>
+                    Estudiantes
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="./cursos.php" class="nav-link">
                   <i class="nav-icon far fa-image"></i>
                   <p>
@@ -102,18 +110,11 @@
                 <a href="./productos.php" class="nav-link">
                   <i class="nav-icon fa fa-users"></i>
                   <p>
-                    Registro de Cursos
+                    Inscripción cursos
                   </p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="./clientes.php" class="nav-link">
-                  <i class="nav-icon fa fa-users"></i>
-                  <p>
-                    Clientes
-                  </p>
-                </a>
-              </li>
+
               <li class="nav-item">
                 <a href="./usuarios.php" class="nav-link">
                   <i class="nav-icon fa fa-lock" aria-hidden="true"></i>
@@ -127,7 +128,7 @@
             <a href="../php/cerrar_sesion.php" class="nav-link">
               <i class="nav-icon fa fa-times-circle"></i>
               <p>
-                Salir
+                Cerrar
               </p>
             </a>
           </li>

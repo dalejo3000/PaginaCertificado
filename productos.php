@@ -172,7 +172,7 @@
               </div>
               <div class="form-group">
                   <label for="precio">Tiempo en días</label>
-                  <input type="number" min="0" name="Tiempo de duración del curso" placeholder="inventario" id="inventario" class="form-control" required>
+                  <input type="number" name="Tiempo de duración del curso" placeholder="inventario" id="inventario" class="form-control" required>
               </div>
 
           </div>
