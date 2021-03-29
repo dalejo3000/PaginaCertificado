@@ -9,8 +9,8 @@
     header("Location: ../index.php");
   }
   $resultado = $conexion ->query("
-    select * from cursos
-    order by id ASC")or die($conexion->error);
+  select * from cursos
+  order by id ASC")or die($conexion->error);
 
 ?>
 <!DOCTYPE html>
@@ -57,7 +57,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6 text-right">
              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              <i class="fa fa-plus"></i> Insertar Registro
+              <i class="fa fa-plus"></i> Insertar Curso
             </button>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -77,6 +77,7 @@
             </div>
 
           <?php  }?>
+
           <?php
             if(isset($_GET['success'])){
           ?>
@@ -85,6 +86,16 @@
             </div>
 
           <?php  }?>
+
+          <?php
+            if(isset($_GET['successedit'])){
+          ?>
+            <div class="alert alert-success" role="alert">
+              Se ha actualizado correctamente.
+            </div>
+
+          <?php  }?>
+
           <table class="table">
             <thead>
               <tr>
@@ -196,120 +207,131 @@
         </div>
       </div>
     </div>
-   <!-- Modal Editar -->
-   <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="modalEditar" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <form action="../php/editarcurso.php" method="POST" enctype="multipart/form-data">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalEditar">Editar Producto</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-              <input type="hidden" id="idEdit" name="id">
 
-              <div class="form-group">
-                  <label for="nombre">Nombre</label>
-                  <input type="nombreEdit" name="nombre" placeholder="Nombre del cliente" id="nombreEdit" class="form-control" required>
-              </div>
-              <div class="form-group">
-                  <label for="descripcionEdit">Descripción</label>
-                  <input type="text" name="cedula" placeholder="CI" id="descripcionEdit" class="form-control" required>
-              </div>
-              <div class="form-group">
-                  <label for="duracionEdit">Duración (días)</label>
-                  <input type="text" name="cedula" placeholder="CI" id="duracionEdit" class="form-control" required>
-              </div>
-              <div class="form-group">
-                  <label for="fechaEdit">Fecha de inicio</label>
-                  <input type="text" name="fechaEdit" placeholder="" id="fechaEdit" class="form-control" required>
-              </div>
+    <!-- Modal Editar -->
+    <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="modalEditar" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <form action="../php/editarcurso.php" method="POST" enctype="multipart/form-data">
+           <div class="modal-header">
+             <h5 class="modal-title" id="modalEditar">Editar Curso</h5>
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary editar">Guardar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <?php include "./layouts/footer.php";?>
-</div>
-<!-- ./wrapper -->
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+             </button>
 
-<!-- jQuery -->
-<script src="./dashboard/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="./dashboard/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="./dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="./dashboard/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="./dashboard/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="./dashboard/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="./dashboard/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="./dashboard/plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="./dashboard/plugins/moment/moment.min.js"></script>
-<script src="./dashboard/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="./dashboard/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="./dashboard/plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="./dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="./dashboard/dist/js/adminlte.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="./dashboard/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="./dashboard/dist/js/demo.js"></script>
+           </div>
 
-<script>
-  $(document).ready(function(){
-    var idEliminar= -1;
-    var idEditar=-1;
-    var fila;
-    $(".btnEliminar").click(function(){
-      idEliminar= $(this).data('id');
-      fila=$(this).parent('td').parent('tr');
-    });
-    $(".eliminar").click(function(){
-      $.ajax({
-        url: '../php/eliminarcurso.php',
-        method:'POST',
-        data:{
-          id:idEliminar
-        }
-      }).done(function(res){
+           <div class="modal-body">
+               <input type="hidden" id="idEdit" name="id">
 
-        $(fila).fadeOut(1000);
-      });
+               <div class="form-group">
+                   <label for="nombre">Nombre</label>
+                   <input type="text" name="nombre" placeholder="nombre" id="nombreEdit" class="form-control" required>
+               </div>
+               <div class="form-group">
+                   <label for="descripcionEdit">Descripcion</label>
+                   <input type="text" name="descripcion" placeholder="descripcion" id="descripcionEdit" class="form-control" required>
+               </div>
+               <div class="form-group">
+                   <label for="duracionEdit">Duración</label>
+                   <input type="number" min="0" name="duracion" placeholder="duracion" id="duracionEdit" class="form-control" required>
+               </div>
 
-    });
-    $(".btnEditar").click(function(){
-      idEditar=$(this).data('id');
-      var nombre=$(this).data('nombre');
-      var descripcion=$(this).data('descripcion');
-      var duracion=$(this).data('duracion');
-      var fecha_inicio=$(this).data('fecha_inicio');
-      $("#nombreEdit").val(nombre);
-      $("#descripcionEdit").val(descripcion);
-      $("#duracionEdit").val(duracion);
-      $("#fechaEdit").val(fecha_inicio);
-    });
-  });
+               <div class="form-group">
+                   <label for="fecha_inicioEdit">Fecha de inicio</label>
+                   <input type="date" min="0" name="fecha_inicio" placeholder="" id="fecha_inicioEdit" class="form-control" required>
+               </div>
 
-</script>
-</body>
-</html>
+
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             <button type="submit" class="btn btn-primary editar">Guardar</button>
+           </div>
+         </form>
+       </div>
+     </div>
+   </div>
+   <?php include "./layouts/footer.php";?>
+ </div>
+ <!-- ./wrapper -->
+
+ <!-- jQuery -->
+ <script src="./dashboard/plugins/jquery/jquery.min.js"></script>
+ <!-- jQuery UI 1.11.4 -->
+ <script src="./dashboard/plugins/jquery-ui/jquery-ui.min.js"></script>
+ <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+ <script>
+   $.widget.bridge('uibutton', $.ui.button)
+ </script>
+ <!-- Bootstrap 4 -->
+ <script src="./dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+ <!-- ChartJS -->
+ <script src="./dashboard/plugins/chart.js/Chart.min.js"></script>
+ <!-- Sparkline -->
+ <script src="./dashboard/plugins/sparklines/sparkline.js"></script>
+ <!-- JQVMap -->
+ <script src="./dashboard/plugins/jqvmap/jquery.vmap.min.js"></script>
+ <script src="./dashboard/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+ <!-- jQuery Knob Chart -->
+ <script src="./dashboard/plugins/jquery-knob/jquery.knob.min.js"></script>
+ <!-- daterangepicker -->
+ <script src="./dashboard/plugins/moment/moment.min.js"></script>
+ <script src="./dashboard/plugins/daterangepicker/daterangepicker.js"></script>
+ <!-- Tempusdominus Bootstrap 4 -->
+ <script src="./dashboard/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+ <!-- Summernote -->
+ <script src="./dashboard/plugins/summernote/summernote-bs4.min.js"></script>
+ <!-- overlayScrollbars -->
+ <script src="./dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+ <!-- AdminLTE App -->
+ <script src="./dashboard/dist/js/adminlte.js"></script>
+ <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+ <script src="./dashboard/dist/js/pages/dashboard.js"></script>
+ <!-- AdminLTE for demo purposes -->
+ <script src="./dashboard/dist/js/demo.js"></script>
+
+ <script>
+   $(document).ready(function(){
+     var idEliminar= -1;
+     var idEditar=-1;
+     var fila;
+     $(".btnEliminar").click(function(){
+       idEliminar= $(this).data('id');
+       fila=$(this).parent('td').parent('tr');
+     });
+     $(".eliminar").click(function(){
+       $.ajax({
+         url: '../php/eliminarcurso.php',
+         method:'POST',
+         data:{
+           id:idEliminar
+         }
+       }).done(function(res){
+
+         $(fila).fadeOut(1000);
+       });
+
+     });
+     $(".btnEditar").click(function(){
+       idEditar=$(this).data('id');
+       var nombre=$(this).data('nombre');
+       var descripcion=$(this).data('descripcion');
+       var duracion=$(this).data('duracion');
+       var fecha_inicio=$(this).data('fecha_inicio');
+
+
+       $("#idEdit").val(idEditar);
+       $("#nombreEdit").val(nombre);
+       $("#descripcionEdit").val(descripcion);
+       $("#duracionEdit").val(duracion);
+       $("#fecha_inicioEdit").val(fecha_inicio);
+
+
+     });
+   });
+
+ </script>
+ </body>
+ </html>
