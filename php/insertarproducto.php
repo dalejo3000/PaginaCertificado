@@ -1,6 +1,6 @@
 <?php
 session_start();
-include './php/conexion.php';
+include './conexion.php';
 if(!isset($_SESSION['carrito2'])){header("Location: ./index.php");}
 $arreglo  = $_SESSION['carrito2'];
 $password="";
@@ -21,4 +21,5 @@ if(isset($_POST['nombre']) &&  isset($_POST['cedula'])   &&  isset($_POST['categ
                     ".$_POST['categoria']."
                 )   ")or die($conexion->error);
                 header("Location: ../admin/productos.php?success");
+              }
 ?>
