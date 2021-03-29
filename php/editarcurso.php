@@ -6,7 +6,7 @@ if(isset($_POST['nombre']) &&  isset($_POST['descripcion'])  &&  isset($_POST['d
                        nombre='".$_POST['nombre']."',
                        descripcion='".$_POST['descripcion']."',
                        duracion=".$_POST['duracion'].",
-                       fecha_inicio=".$_POST['fecha_inicio']."
+                       fecha_inicio='".$_POST['fecha_inicio']."'
                        where id=".$_POST['id']);
    header("Location: ../admin/cursos.php?successedit");
 }
