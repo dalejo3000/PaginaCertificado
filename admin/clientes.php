@@ -57,7 +57,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6 text-right">
              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              <i class="fa fa-plus"></i> Insertar Cliente
+              <i class="fa fa-plus"></i> Insertar Estudiante
             </button>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -82,6 +82,14 @@
           ?>
             <div class="alert alert-success" role="alert">
               Se ha insertado correctamente.
+            </div>
+
+          <?php  }?>
+          <?php
+            if(isset($_GET['successedit'])){
+          ?>
+            <div class="alert alert-success" role="alert">
+              Se ha modificado correctamente.
             </div>
 
           <?php  }?>
@@ -156,7 +164,7 @@
         <?php /* include("./layouts/header.php"); */?>
           <form action="../tyclientes.php" method="POST" enctype="multipart/form-data">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Insertar Cliente</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Insertar Estudiante</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -165,7 +173,7 @@
           <div class="modal-body">
             <div class="col-md-20 mb-5 mb-md-0">
               <div class="p-3 p-lg-5 border">
-                  <h2 class="h3 mb-3 text-black">Crear Cliente</h2>
+                  <h2 class="h3 mb-3 text-black">Crear Estudiante</h2>
                 <div class="form-group row">
                   <div class="col-md-6">
                     <label for="c_fname" class="text-black">Nombres<span class="text-danger">*</span></label>
@@ -180,7 +188,7 @@
                 <div class="form-group row mb-5">
                   <div class="col-md-6">
                     <label for="c_email_address" class="text-black">Email<span class="text-danger">*</span></label>
-                    <input type="mail" class="form-control" id="c_email_address" name="c_email_address">
+                    <input type="email" class="form-control" id="c_email_address" name="c_email_address">
                   </div>
                   <div class="col-md-6">
                     <label for="c_phone" class="text-black">Teléfono<span class="text-danger">*</span></label>
@@ -213,7 +221,7 @@
                 </div>
 
                 <div class="form-group">
-                  <button class="btn btn-primary btn-lg py-3 btn-block" type="submit">Crear cliente</button>
+                  <button class="btn btn-primary btn-lg py-3 btn-block" type="submit">Crear Estudiante</button>
                 </div>
               </div>
             </div>
@@ -253,9 +261,9 @@
    <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="modalEditar" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <form action="../php/editarproducto.php" method="POST" enctype="multipart/form-data">
+        <form action="../php/editarcliente.php" method="POST" enctype="multipart/form-data">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalEditar">Editar Producto</h5>
+            <h5 class="modal-title" id="modalEditar">Editar Cliente</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -265,47 +273,19 @@
 
               <div class="form-group">
                   <label for="nombre">Nombre</label>
-                  <input type="nombreEdit" name="nombre" placeholder="Nombres y Apellidos" id="nombreEdit" class="form-control" required>
+                  <input type="text" name="nombre" placeholder="Nombres y Apellidos" id="nombreEdit" class="form-control" required>
               </div>
-              <div class="form-group">
-                  <label for="cedula">Cedula</label>
-                  <input type="cedulaEdit" name="cedula" placeholder="CI" id="cedulaEdit" class="form-control" required>
-              </div>
-
-              <div class="form-group">
-                  <label for="fecha">Fecha</label>
-                  <input type="dateEdit" name="fecha"  id="fechaEdit" class="form-control" required>
-              </div>
-
-              <div class="form-group">
-                  <label for="cedula">Curso</label>
-                  <input type="cursoEdit" name="curso" placeholder="Curso" id="cursoEdit" class="form-control" >
-              </div>
-
               <div class="form-group">
                   <label for="telefono">Telefono</label>
-                  <input type="text" name="telefonoEdit" placeholder="telefono" id="telefonoEdit" class="form-control" required>
+                  <input type="text" name="telefono" placeholder="telefono" id="telefonoEdit" class="form-control" required>
               </div>
-
               <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="emailEdit" name="email" placeholder="Email" id="emailEdit" class="form-control" required>
+                  <label for="emailEdit">Email</label>
+                  <input type="email" name="email" placeholder="Email" id="emailEdit" class="form-control" required>
               </div>
-
-              <div class="form-group">
-                  <label for="img_perfil">Imagen</label>
-                  <input type="file" name="img_perfil"  id="img_perfil" class="form-control">
-              </div>
-
-              <div class="form-group">
-                  <label for="passwordEdit">password</label>
-                  <input type="password" name="password" placeholder="precio" id="passwordEdit" class="form-control" required>
-              </div>
-
-
               <div class="form-group">
                   <label for="nivelEdit">Nivel</label>
-                  <select name="nivel" id="nivel" class="form-control" required>
+                  <select name="nivel" id="nivelEdit" class="form-control" required>
                    <?php
                     $res= $conexion->query("select distinct nivel from usuario");
                     while($f=mysqli_fetch_array($res)){
@@ -314,7 +294,22 @@
                    ?>
                   </select>
               </div>
-
+              <div class="form-group">
+                  <label for="cedulaEdit">Cédula</label>
+                  <input type="text" name="cedula" placeholder="CI" id="cedulaEdit" class="form-control" required>
+              </div>
+              <div class="form-group">
+                  <label for="fechaEdit">Fecha</label>
+                  <input type="date" name="fecha"  id="fechaEdit" class="form-control" required>
+              </div>
+              <div class="form-group">
+                  <label for="img_perfilEdit">Imagen</label>
+                  <input type="file" name="img_perfil"  id="img_perfilEdit" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label for="passwordEdit">password</label>
+                  <input type="password" name="password" placeholder="password" id="passwordEdit" class="form-control" required>
+              </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -374,7 +369,7 @@
     });
     $(".eliminar").click(function(){
       $.ajax({
-        url: './php/eliminarusuario.php',
+        url: './php/eliminarcliente.php',
         method:'POST',
         data:{
           id:idEliminar
@@ -387,22 +382,23 @@
     $(".btnEditar").click(function(){
       idEditar=$(this).data('id');
       var nombre=$(this).data('nombre');
+      var telefono=$(this).data('telefono');
+      var email=$(this).data('email');
+      var nivel=$(this).data('nivel');
       var cedula=$(this).data('cedula');
       var fecha=$(this).data('fecha');
       var curso=$(this).data('curso');
-      var telefono=$(this).data('telefono');
-      var email=$(this).data('email');
       var password=$(this).data('password');
-      var nivel=$(this).data('nivel');
+
 
       $("#nombreEdit").val(nombre);
+      $("#telefonoEdit").val(telefono);
+      $("#emailEdit").val(email);
+      $("#nivelEdit").val(nivel);
       $("#cedulaEdit").val(cedula);
       $("#fechaEdit").val(fecha);
       $("#cursoEdit").val(curso);
-      $("#telefonoEdit").val(telefono);
-      $("#emailEdit").val(email);
       $("#passwordEdit").val(password);
-      $("#nivelEdit").val(nivelEdit);
       $("#idEdit").val(idEditar);
     });
   });

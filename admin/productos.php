@@ -12,7 +12,7 @@
     select clientes.*, cursos.nombre as catego  from
     clientes
     inner join cursos on clientes.id_categoria = cursos.id
-    order by id ASC")or die($conexion->error);
+    order by nombre ASC")or die($conexion->error);
 ?>
 
 <!DOCTYPE html>

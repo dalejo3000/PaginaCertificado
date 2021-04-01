@@ -49,6 +49,9 @@ $arregloUsuario = $_SESSION['datos_login'];
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">BIENVENIDO</h1>
+            <img src="https://thumbs.dreamstime.com/b/placa-de-circuito-abstracta-del-fondo-la-tecnolog%C3%ADa-y-c%C3%B3digo-html-d-105501221.jpg"
+                      width="1330" height="950"
+            >            
           </div><!-- /.col -->
 
         </div><!-- /.row -->

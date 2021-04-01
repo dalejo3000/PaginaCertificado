@@ -12,13 +12,15 @@ if(isset($_POST['c_account_password'])){
 
 if(isset($_POST['nombre']) &&  isset($_POST['cedula'])   &&  isset($_POST['categoria'])){
 
+            $id_usuario = $conexion->insert_id;
+            $fecha = date('Y-m-d h:m:s');
             $conexion->query("insert into clientes
-                (nombre,cedula, imagen,id_categoria) values
+                (nombre,cedula, id_categoria,fecha_creacion) values
                 (
                     '".$_POST['nombre']."',
                     '".$_POST['cedula']."',
-                    '$nombreFinal',
-                    ".$_POST['categoria']."
+                    ".$_POST['categoria'].",
+                    '$fecha'
                 )   ")or die($conexion->error);
                 header("Location: ../admin/productos.php?success");
               }

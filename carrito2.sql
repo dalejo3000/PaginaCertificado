@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-03-2021 a las 00:36:45
+-- Tiempo de generación: 01-04-2021 a las 10:21:22
 -- Versión del servidor: 10.1.33-MariaDB
 -- Versión de PHP: 7.4.8
 
@@ -31,21 +31,21 @@ CREATE TABLE `clientes` (
   `id` int(11) NOT NULL,
   `nombre` varchar(300) NOT NULL,
   `cedula` char(10) NOT NULL,
-  `imagen` varchar(200) NOT NULL,
   `id_categoria` int(11) NOT NULL,
-  `registro` varchar(80) NOT NULL
+  `fecha_creacion` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id`, `nombre`, `cedula`, `imagen`, `id_categoria`, `registro`) VALUES
-(1, 'Alejandro Romero', '1234567890', '1616139888.jpg', 1, ''),
-(2, 'Alejandro Romero', '1234567890', '1616139888.jpg', 2, ''),
-(3, 'Alejandro Romero', '1234567890', '1616139888.jpg', 3, ''),
-(7, 'David', '2233445566', '', 0, ''),
-(11, 'Ricardo Palacios', '1722637475', '', 2, '');
+INSERT INTO `clientes` (`id`, `nombre`, `cedula`, `id_categoria`, `fecha_creacion`) VALUES
+(30, 'Alejandro Romero', '2233445566', 3, '2021-04-01'),
+(31, 'Ricardo Palacios', '1234567890', 1, '2021-04-01'),
+(32, 'Ricardo Palacios', '1234567890', 2, '2021-04-01'),
+(33, 'Ricardo Palacios', '1234567890', 3, '2021-04-01'),
+(34, 'Ricardo Palacios', '1234567890', 8, '2021-04-01'),
+(35, 'David Romero', '1722637475', 1, '2021-04-01');
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,9 @@ CREATE TABLE `cursos` (
 INSERT INTO `cursos` (`id`, `nombre`, `descripcion`, `duracion`, `fecha_inicio`, `imagen`, `fecha_creacion`, `usuario_creacion`) VALUES
 (1, 'MatemÃ¡ticas', 'Curso de MatemÃ¡ticas', 10, '2021-03-10', '', '2021-03-26', ''),
 (2, 'Lenguaje', 'Curso de Lenguaje', 12, '2021-03-11', '', '2021-03-26', ''),
-(3, 'Sociales', 'Curso de Sociales', 10, '2020-10-30', '', '2021-03-26', '');
+(3, 'Sociales', 'Curso de Sociales', 10, '2021-03-11', '', '2021-03-26', ''),
+(8, 'Plan Nacional', 'Bono de desarrollo', 455, '2021-03-11', '', '2021-03-29', ''),
+(14, 'Curso del MIL y Chivo', 'La que se abriÃ³ con el chivo, la competencia del Saul', 30, '2021-03-15', '', '2021-03-30', '');
 
 -- --------------------------------------------------------
 
@@ -131,7 +133,10 @@ INSERT INTO `usuario` (`id`, `nombre`, `telefono`, `email`, `password`, `img_per
 (58, 'Ricardo Palacios', '+593998004766', 'rpalacios@prueba.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'default.jpg', 'admin', '1234', '2021-03-11', ''),
 (65, 'fdsfsdf Romero', '+593998004766', 'pruebalunes', '601f1889667efaebb33b8c12572835da3f027f78', 'default.jpg', 'admin', '1234', '2021-03-08', 'frio'),
 (66, 'cliente CLIENTE', '0998004766', 'pruebalunes', '601f1889667efaebb33b8c12572835da3f027f78', 'default.jpg', 'cliente', '1234567890', '2021-03-10', 'curso'),
-(67, 'cliente CLIJFISJD', '+593998004766', 'pruebalunes', '601f1889667efaebb33b8c12572835da3f027f78', 'default.jpg', 'cliente', '1234', '2021-03-17', 'casa');
+(67, 'cliente CLIJFISJD', '+593998004766', 'pruebalunes', '601f1889667efaebb33b8c12572835da3f027f78', 'default.jpg', 'cliente', '1234', '2021-03-17', 'casa'),
+(70, 'David Romero', '+593998004766', 'dalejo3000@gmail.com', '601f1889667efaebb33b8c12572835da3f027f78', 'default.jpg', 'cliente', '5756', '2021-03-03', '5675'),
+(71, 'media MEDIA', '0998004766', 'pruebalunes', '601f1889667efaebb33b8c12572835da3f027f78', 'default.jpg', 'cliente', '1234567890', '2021-03-11', 'pruebalunes'),
+(72, 'madrugado  MM', '+593998004766', 'pruebalunes@gmail.com', '601f1889667efaebb33b8c12572835da3f027f78', 'default.jpg', 'cliente', '1234567890', '2021-03-03', 'curso');
 
 --
 -- Índices para tablas volcadas
@@ -169,13 +174,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `cursos`
 --
 ALTER TABLE `cursos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `registro_certificado`
@@ -187,7 +192,7 @@ ALTER TABLE `registro_certificado`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

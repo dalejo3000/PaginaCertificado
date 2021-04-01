@@ -29,7 +29,7 @@ while ($registro = mysql_fetch_Array($registros)){
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Busqueda de Estudiante</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -74,7 +74,7 @@ while ($registro = mysql_fetch_Array($registros)){
 
     <div id="container">
 
-      <form action="buscar.php" method="post">
+      <form action="./certificado.php" method="post">
         <div class="p-3 p-lg-5 border">
             <h3 class="h3 mb-3 text-black">Búsqueda de Estudiante</h2>
               <!--
@@ -84,48 +84,87 @@ while ($registro = mysql_fetch_Array($registros)){
               </div>
             -->
               <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-                <form action="./busqueda.php" class="site-block-top-search" method="GET">
+                <!--<form action="./buscar.php" class="site-block-top-search" method="GET">
                   <span class="icon icon-search2"></span>
                   <input type="text" class="form-control border-0" placeholder="Ingrese cédula del usuario" name="texto">
-                </form>
+                </form>-->
+                <div class="col-sm-6 text-right">
+                    <input type="submit" value="Nueva Búsqueda" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa">
+                </div>
               </div>
         </div>
       </form>
 
-            <form id="details" target="_blank" action="make_certificate.php" method="POST" enctype="multipart/form-data">
+            <form id="details" target="_blank" action="./make_certificate.php" method="POST" enctype="multipart/form-data">
 
                 <div class="p-3 p-lg-5 border">
                     <h2 class="h3 mb-3 text-black">Busqueda para: "<?php echo $_GET['texto']; ?>"</h2>
-
-                <div class="col-md-4">
+                <div class="form-group">
+<!--Consulta 1-->
                   <?php
-                    $resultado = $conexion ->query("select * from usuario where
+                    $resultado = $conexion ->query("select * from clientes where
                     cedula = '".$_GET['texto']."'
                     ")or die($conexion -> error);
                       if(mysqli_num_rows($resultado) > 0){
-                        while($fila = mysqli_fetch_array($resultado)){
+                      $fila = mysqli_fetch_array($resultado);
                   ?>
 
-                    <div class="col-md-6">
-                      <label> Nombres del Estudiante:</label></br>
+                    <div class="form-group">
+                      <label>Nombres del Estudiante:</label></br>
                       <input id="name" name="name" class="textField" placeholder="Nombres y Apellidos"
-                        value="<?php echo $fila['nombre']; ?>">
+                        value="<?php echo $fila['nombre']; ?>" required>
                     </div>
-                    <div class="col-md-6">
-                      <label>Curso aprobado:</label></br>
-                      <input id="event" name="event" class="textField" placeholder="Curso"
-                        value="<?php echo $fila['curso']; ?>">
-                    </div>
-                </div>
 
-              <?php } }else{
+                    <div class="form-group">
+                      <label>Cédula del Estudiante:</label></br>
+                      <input id="cedula" name="cedula" class="textField" placeholder="CI"
+                        value="<?php echo $fila['cedula']; ?>">
+                    </div>
+
+                </div>
+              <?php } else{
                 echo  '<h2>Sin resultados</h2>';
               } ?>
+
+<!--Consulta 2-->
+
+              <div class="form-group">
+                <?php
+                  $resultado = $conexion ->query("select * from clientes where
+                  cedula = '".$_GET['texto']."'
+                  ")or die($conexion -> error);
+                    if(mysqli_num_rows($resultado) > 0){
+
+                ?>
+                  <div class="form-group">
+                      <label>Seleccione el código de la materia:</label></br>
+                      <select name="event" id="event" class="form-control" >
+                       <?php
+                        while($f=mysqli_fetch_array($resultado1)){
+                          echo '<option selected="true" disabled="disabled" value="'.$f['id_categoria'].'" >'.$f['catego'].'</option>';
+                          echo '<option class="text-primary font-weight-bold" value="'.$f['catego'].'" >'.$f['id_categoria'].'</option>';
+                        }
+                       ?>
+                      </select>
+                  </div>
+
+              </div>
+
+
+            <?php  }else{
+
+              echo  '<h2>Sin resultados</h2>';
+            } ?>
+
+<!--Consulta 3-->
+
+
+
 
                       <div class="content-header">
                         <div class="container-fluid">
                           <div class="row mb-2">
-
                             <div class="col-sm-6 text-right">
                                 <input type="submit" value="Generar Certificados" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 <i class="fa">
@@ -147,6 +186,7 @@ while ($registro = mysql_fetch_Array($registros)){
   <!-- Modal -->
 
 <!-- ./wrapper -->
+
 
 <!-- jQuery -->
 <script src="./admin/dashboard/plugins/jquery/jquery.min.js"></script>
@@ -181,7 +221,7 @@ while ($registro = mysql_fetch_Array($registros)){
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="./admin/dashboard/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="./admin/dashboard/dist/js/demo.js"></script>
+<script src="/admin./dashboard/dist/js/demo.js"></script>
 
 
 
